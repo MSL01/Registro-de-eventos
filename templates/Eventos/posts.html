@@ -3,11 +3,56 @@
       type="text/css"
       href="{% static 'Eventos/css/bootstrap.css' %}" />
 {% include 'Eventos/navbar.html' %}
-<h1 style="text-align: center">Eventos Registrados</h1>
+<h1 style="text-align: center; margin: auto; margin-top: 50px">Eventos Registrados</h1>
+<style>
+    table {
+        margin: auto;
+        width: 90%;
+        border-radius: 15px;
+    }
+    th, td{
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 15px;
+    }
+    th{
+        text-align: center;
+    }
+
+    tbody tr:nth-child(odd){
+        background-color: #bcbabe;
+    }
+    tbody tr:nth-child(even){
+        background-color: #f1f1f2;
+    }
+    #tablaeventos{
+        text-align: center;
+    }
+
+</style>
 <div style="text-align: center">
-    {% for post in object_list %}<br>
-        <h2>{{ post.event_name }}</h2><br>
-        <b>{{ post.event_type }}</b><br>
-        {{ post.desc }}<br>
-    {% endfor %}
+    <div  id="tablaeventos">
+        <table id="tabla">
+            <tr style="background-color: #a1d6e2;">
+                <th>ID</th>
+                <th>Nombre del evento</th>
+                <th>Tipo de Evento</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+            {% for post in object_list %}<br>
+            <tr>
+
+                <td>{{ post.id }}</td>
+                <td>{{ post.nombre_del_evento }}</td>
+                <td>{{ post.tipo_de_evento }}</td>
+                <td>{{ post.desc }}</td>
+                <td>{{ post.fecha }}</td>
+                <td>{{ post.est }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
+

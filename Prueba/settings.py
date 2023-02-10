@@ -77,10 +77,16 @@ WSGI_APPLICATION = 'Prueba.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Prueba',
+        'USER': 'postgres',
+        'PASSWORD': 'msl001',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
+
 
 
 # Password validation
@@ -126,3 +132,5 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

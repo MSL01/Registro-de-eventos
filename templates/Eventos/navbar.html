@@ -1,16 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; overflow: hidden; top: 0; width: 100%">
     <div class="container-fluid">
         <div class="mx-auto order-0" id="btneventos">
           <ul class="navbar-nav ml-auto text-center">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Eventos Registrados</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Registrar Eventos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" style="color: #6ea8fe">Registrar Eventos</a>
-            </li>
+            {% block content %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Eventos Registrados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registrar Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Administrar Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="color: #6ea8fe">Cerrar Sesión</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Eventos Registrados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="color: #6ea8fe">Ingresar como administrador</a>
+                    </li>
+                {% endif %}
+            {% endblock %}
           </ul>
         </div>
     </div>
