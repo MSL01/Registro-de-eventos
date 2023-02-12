@@ -1,0 +1,147 @@
+{% load static %}
+<link rel="stylesheet"
+      type="text/css"
+      href="{% static 'Eventos/css/bootstrap.css' %}" />
+{% include 'Eventos/navbar.html' %}
+<style>
+    table {
+        margin: auto;
+        width: 90%;
+        border-radius: 15px;
+    }
+    th{
+        text-align: center;
+    }
+    tbody tr:nth-child(odd){
+        background-color: #bcbabe;
+    }
+    tbody tr:nth-child(even){
+        background-color: #f1f1f2;
+    }
+    #tablaeventos{
+        text-align: center;
+    }
+
+    .nonadmin
+    {
+        position: center;
+        margin-top: 20%;
+        margin-left: 30%;
+    }
+
+</style>
+
+{% if user.is_authenticated %}
+    <div style="background-color: rgba(68, 98, 71, 0.5)">
+        <h1 style="text-align: center; margin-top: 7%; color: black">Eventos Registrados</h1>
+        <h3 style="text-align: center; margin-top: 2%; color: black">Estado: Revisado</h3>
+    </div>
+
+    <div style="text-align: center">
+        <div  id="tablaeventos">
+            <table id="tabla">
+                <tr style="background-color: #a1d6e2;">
+                    <th>ID</th>
+                    <th>Nombre del evento</th>
+                    <th>Tipo de Evento</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Gestión</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                {% for post in object_list %}<br>
+                    {% if post.est == 'Revisado' %}
+                        <tr>
+
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.nombre_del_evento }}</td>
+                            <td>{{ post.tipo_de_evento }}</td>
+                            <td>{{ post.desc }}</td>
+                            <td>{{ post.fecha }}</td>
+                            <td>{{ post.est }}</td>
+                            <td>{{ post.gestion }}</td>
+                            <td>
+                                <form name="EditForm" action="{% url 'edit' idd=post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a class="btn btn-floating m-1" href="{% url 'edit' idd=post.id %}" role="button">
+                                        <img src="{% static 'Eventos/images/edit.png' %}">
+                                    </a>
+                                </form>
+                            </td>
+                            <td>
+                                <form name="DeleteForm" action="{% url 'delete' idd=post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a class="btn btn-floating m-1" href="{% url 'delete' idd=post.id %}" role="button">
+                                        <img src="{% static 'Eventos/images/delete.png' %}">
+                                    </a>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div style="background-color: rgba(68, 98, 71, 0.5)">
+        <h1 style="text-align: center; margin-top: 7%; color: black">Eventos Registrados</h1>
+        <h3 style="text-align: center; margin-top: 2%; color: black">Estado: Pendiente por Revisión</h3>
+    </div>
+    <div style="text-align: center">
+        <div  id="tablaeventos">
+            <table id="tabla">
+                <tr style="background-color: #a1d6e2;">
+                    <th>ID</th>
+                    <th>Nombre del evento</th>
+                    <th>Tipo de Evento</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Gestión</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                {% for post in object_list %}<br>
+                    {% if  post.est == 'Pendiente por Revisar'  %}
+                        <tr>
+
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.nombre_del_evento }}</td>
+                            <td>{{ post.tipo_de_evento }}</td>
+                            <td>{{ post.desc }}</td>
+                            <td>{{ post.fecha }}</td>
+                            <td>{{ post.est }}</td>
+                            <td>{{ post.gestion }}</td>
+                            <td>
+                                <form name="EditForm" action="{% url 'edit' idd=post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a class="btn btn-floating m-1" href="{% url 'edit' idd=post.id %}" role="button">
+                                        <img src="{% static 'Eventos/images/edit.png' %}">
+                                    </a>
+                                </form>
+                            </td>
+                            <td>
+                                <form name="DeleteForm" action="{% url 'delete' idd=post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a class="btn btn-floating m-1" href="{% url 'delete' idd=post.id %}" role="button">
+                                        <img src="{% static 'Eventos/images/delete.png' %}">
+                                    </a>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <h3>No hay actualizaciones.</h3>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% else %}
+    <div class="nonadmin">
+        <h1>NO ERES UN ADMINISTRADOR!</h1>
+    </div>
+{% endif %}
+
+{% include 'Eventos/footer.html' %}

@@ -130,7 +130,17 @@ STATICFILES_DIRS = (
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
+DATE_INPUT_FORMATS = [
+    '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
+    '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
+    '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+    '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
+    '%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
+    '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
+    '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
+    '%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
+    '%m/%d/%y %H:%M',        # '10/25/06 14:30'
+]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'

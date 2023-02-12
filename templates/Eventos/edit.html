@@ -1,0 +1,121 @@
+{% load static %}
+<link rel="stylesheet"
+      type="text/css"
+      href="{% static 'Eventos/css/bootstrap.css' %}" />
+{% include 'Eventos/navbar2.html' %}
+<style>
+    table {
+        margin: auto;
+        width: 90%;
+        border-radius: 15px;
+    }
+    .cuadroR{
+        margin-top: 10%;
+        padding: 3%;
+        background-color: rgba(0, 100, 0, 9%);
+        border-radius: 10px;
+    }
+    body{
+        font-family: 'Noto Sans', sans-serif;
+    }
+    .btnre{
+        color:#fff;
+        background-color: #0f5132;
+        outline: none;
+        border: 0;
+        margin-left: 40%;
+        color: #fff;
+        padding:10px 20px;
+        text-transform:uppercase;
+        margin-top:50px;
+        border-radius:2px;
+        cursor:pointer;
+    }
+    .text-in{
+        color: black;
+        font-size: 17px;
+        display: block;
+    }
+    .input-container{
+        position:relative;
+        margin-bottom:25px;
+        border-radius: 15px;
+    }
+    .input-container label{
+        position:absolute;
+        top:0px;
+        left:0px;
+        font-size:16px;
+        color:#fff;
+        pointer-event:none;
+        transition: all 0.5s ease-in-out;
+    }
+    .input-container input{
+      border:0;
+      border-bottom:1px solid #555;
+      background:transparent;
+      width:100%;
+      padding:8px 0 5px 0;
+      font-size:16px;
+      color: black;
+    }
+    .input-container input:focus{
+     border:none;
+     outline:none;
+     border-bottom:1px solid #e74c3c;
+    }
+    .input-container input:focus ~ label,
+    .input-container input:valid ~ label{
+        top:-12px;
+        font-size:12px;
+    }
+</style>
+
+<div class="container">
+    <div class="cuadroR">
+        <h1 style="text-align: center">Actualizar evento</h1>
+        {% if key2 %}
+        <div class="panelregistro">
+            {% block content %}
+            <form action="{% url 'update' idd=key2.id %}" method="post">
+                {% csrf_token %}
+                <label class="text-in">Nombre del evento</label>
+                <div class="input-container">
+                    <input type="text" name="nameev" value="{{ key2.nombre_del_evento }}">
+                </div>
+                <label class="text-in">Tipo de evento</label>
+                <div class="input-container">
+                    <input type="text" name="tipoev" value="{{ key2.tipo_de_evento }}">
+                </div>
+                <label class="text-in">Descripción del evento</label>
+                <div class="input-container">
+                    <textarea rows="4" cols="125" maxlength="125" name="descev">{{ key2.desc }}</textarea>
+                </div>
+                <label class="text-in">Fecha del evento</label>
+                <div class="input-container">
+                    <input type="date" name="fechaev"  value="{{ key2.fecha }}">{{ key2.fecha }}
+                </div>
+                <label class="text-in">Estado del evento</label>
+                <div class="input-container">
+                    <select name="estev">
+                      <option value="Pendiente por Revisar">Pendiente por Revisar</option>
+                      <option value="Revisado">Revisado</option>
+                    </select>
+                </div>
+                <label class="text-in">Gestión del evento</label>
+                <div class="input-container">
+                    <select name="gestev">
+                      <option value="Sin Gestión">Sin Gestión</option>
+                      <option value="Requiere Gestión">Requiere Gestión</option>
+                    </select>
+                </div>
+                <button type="submit" class="btnre">Actualizar</button>
+            </form>
+            {% endblock %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% include 'Eventos/footer.html' %}

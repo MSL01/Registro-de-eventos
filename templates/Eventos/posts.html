@@ -3,22 +3,15 @@
       type="text/css"
       href="{% static 'Eventos/css/bootstrap.css' %}" />
 {% include 'Eventos/navbar.html' %}
-<h1 style="text-align: center; margin: auto; margin-top: 50px">Eventos Registrados</h1>
 <style>
     table {
         margin: auto;
         width: 90%;
         border-radius: 15px;
     }
-    th, td{
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        border-radius: 15px;
-    }
     th{
         text-align: center;
     }
-
     tbody tr:nth-child(odd){
         background-color: #bcbabe;
     }
@@ -30,6 +23,12 @@
     }
 
 </style>
+
+<div style="background-color: rgba(68, 98, 71, 0.5)">
+    <h1 style="text-align: center; margin-top: 7%; color: black">Eventos Registrados</h1>
+    <h3 style="text-align: center; margin-top: 2%; color: black">Estado: Revisado</h3>
+</div>
+
 <div style="text-align: center">
     <div  id="tablaeventos">
         <table id="tabla">
@@ -40,19 +39,61 @@
                 <th>Descripción</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Gestión</th>
             </tr>
             {% for post in object_list %}<br>
-            <tr>
+                {% if post.est == 'Revisado' %}
+                    <tr>
 
-                <td>{{ post.id }}</td>
-                <td>{{ post.nombre_del_evento }}</td>
-                <td>{{ post.tipo_de_evento }}</td>
-                <td>{{ post.desc }}</td>
-                <td>{{ post.fecha }}</td>
-                <td>{{ post.est }}</td>
-            </tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.nombre_del_evento }}</td>
+                        <td>{{ post.tipo_de_evento }}</td>
+                        <td>{{ post.desc }}</td>
+                        <td>{{ post.fecha }}</td>
+                        <td>{{ post.est }}</td>
+                        <td>{{ post.gestion }}</td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </table>
     </div>
 </div>
 
+<div style="background-color: rgba(68, 98, 71, 0.5)">
+    <h1 style="text-align: center; margin-top: 7%; color: black">Eventos Registrados</h1>
+    <h3 style="text-align: center; margin-top: 2%; color: black">Estado: Pendiente por Revisión</h3>
+</div>
+<div style="text-align: center">
+    <div  id="tablaeventos">
+        <table id="tabla">
+            <tr style="background-color: #a1d6e2;">
+                <th>ID</th>
+                <th>Nombre del evento</th>
+                <th>Tipo de Evento</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Gestión</th>
+            </tr>
+            {% for post in object_list %}<br>
+                {% if  post.est == 'Pendiente por Revisar'  %}
+                    <tr>
+
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.nombre_del_evento }}</td>
+                        <td>{{ post.tipo_de_evento }}</td>
+                        <td>{{ post.desc }}</td>
+                        <td>{{ post.fecha }}</td>
+                        <td>{{ post.est }}</td>
+                        <td>{{ post.gestion }}</td>
+                    </tr>
+                {% else %}
+                    <h3>No hay actualizaciones.</h3>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% include 'Eventos/footer.html' %}
