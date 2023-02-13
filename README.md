@@ -16,6 +16,7 @@ descargar postgreSQL desde: https://www.postgresql.org/download/ para el manejo 
 En el intérprete de comandos ingresar para:
 
 Iniciar la apiweb: >py manage.py runserver
+para crear un superuser >py manage.py createsuperuser
 
 usuario administrador: admin
 contraseña: admin123
