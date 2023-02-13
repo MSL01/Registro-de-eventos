@@ -17,6 +17,9 @@ En el intérprete de comandos ingresar para:
 
 Iniciar la apiweb: >py manage.py runserver
 
+usuario administrador: admin
+contraseña: admin123
+
 
 ```
 
