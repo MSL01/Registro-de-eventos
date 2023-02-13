@@ -1,4 +1,4 @@
-# GUI Event Handling
+# Registro de eventos con Django
 
 
 ## Installation
